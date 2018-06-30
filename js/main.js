@@ -118,7 +118,7 @@ var constraints = {
 
 console.log('Getting user media with constraints', constraints);
 requestTurn(
-    's1.taraba.net:3478'
+    'stun.sipgate.net:3478'
   );
 // if (location.hostname !== 'localhost') {
 //   requestTurn(
