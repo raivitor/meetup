@@ -4,28 +4,17 @@ var os = require('os');
 var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
-var express = require('express');
+
 var porta = process.env.PORT || 3000;
 
-//var fileServer = new(nodeStatic.Server)();
-//var app = express();
-
-var app = express();
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Access-Control-Allow-Headers, Content-Type, Accept, Authorization, x-access-token");
+var fileServer = new(nodeStatic.Server)();
+var app = http.createServer(function(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   fileServer.serve(req, res);
-  next();
-});
+}).listen(porta);
 
-var server = http.createServer(app);
-// var app = http.createServer(function(req, res) {
-//   fileServer.serve(req, res);
-// }).listen(porta);
-
-var io = socketIO.listen(server);
-server.listen(porta);
+var io = socketIO.listen(app);
 io.sockets.on('connection', function(socket) {
 
   // convenience function to log server messages on the client
