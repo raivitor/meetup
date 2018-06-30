@@ -10,6 +10,10 @@ var porta = process.env.PORT || 3000;
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
   fileServer.serve(req, res);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Access-Control-Allow-Headers, Content-Type, Accept, Authorization, x-access-token");
+  
 }).listen(porta);
 
 var io = socketIO.listen(app);
