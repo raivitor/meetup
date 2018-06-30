@@ -117,12 +117,14 @@ var constraints = {
 };
 
 console.log('Getting user media with constraints', constraints);
-
-if (location.hostname !== 'localhost') {
-  requestTurn(
-    'https://appr.tc/r/798226988'
+requestTurn(
+    's1.taraba.net:3478'
   );
-}
+// if (location.hostname !== 'localhost') {
+//   requestTurn(
+//     's1.taraba.net:3478'
+//   );
+// }
 
 function maybeStart() {
   console.log('>>>>>>> maybeStart() ', isStarted, localStream, isChannelReady);
